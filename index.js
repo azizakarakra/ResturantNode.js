@@ -5,7 +5,7 @@ import initApp from "./src/Modules/app.router.js";
 
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.set(`case sensitive routing`, true);
 initApp(app, express);
