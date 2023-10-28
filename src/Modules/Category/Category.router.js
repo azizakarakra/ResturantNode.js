@@ -12,6 +12,6 @@ const router = Router({mergeParams: true});
 router.post('/',auth(endpoint.create),fileUpload(fileValidation.image).single('image'),validation(validators.createCategory),asyncHandler(CategoryController.createCategory));
 router.put('/update/:categoryId',auth(endpoint.update),fileUpload(fileValidation.image).single('image'),validation(validators.updateCategory),asyncHandler(CategoryController.updateCategory));
 router.get('/Specific/:categoryId',validation(validators.getSpecificCattegory),asyncHandler(CategoryController.getSpecificCattegory));
-router.get('/' , asyncHandler(CategoryController.getCategories) );
+router.get('/' , validation(validators.getCategories), asyncHandler(CategoryController.getCategories) );
 
 export default router;

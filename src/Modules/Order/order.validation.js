@@ -36,3 +36,5 @@ export const updateOrderStatusFromAdmin = joi
     status: joi.string().required(),
   })
   .required();
+
+export const getOrders = joi.object({}).required();

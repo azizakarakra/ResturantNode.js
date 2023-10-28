@@ -40,24 +40,6 @@ export const createOrder = async (req, res, next) => {
     status: paymentType == "card" ? "approved" : "pending",
   });
 
-  for (const meal of meals) {
-    await MealModel.updateOne(
-      { _id: meal.mealId },
-    );
-  }
-
-  await CartModel.updateOne(
-    { _id: req.user._id },
-    {
-      $pull: {
-        meals: {
-          mealId: { $in: mealIds },
-        },
-      },
-    }
-  );
-
-
   return res.status(201).json({ message: "success", order });
 }
 
@@ -128,7 +110,7 @@ export const createOrderWithAllMealsFromCart = async (req, res, next) => {
   
   createInvoice(invoice, "invoice.pdf");
 
-  await sendEmail(req.user.email, 'infinity light - invoice', 'wlcome', {
+  await sendEmail(req.user.email, 'Resturant - invoice', 'welcome', {
     path:'invoice.pdf',
     contentType:'application/pdf',
   });
@@ -169,4 +151,10 @@ export const updateOrderStatusFromAdmin = async(req, res, next) => {
   
 return res.status(200).json({message:"success",order});
 
+}
+
+export const getOrders = async (req,res,next) => {
+
+  const orders = await OrderModel.find();
+  return res.status(200).json({message:"success",orders});
 }

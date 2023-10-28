@@ -4,7 +4,7 @@ import * as orderController from './controller/order.controller.js';
 import { asyncHandler } from "../../Services/errorHandling.js";
 import * as validators from './order.validation.js';
 import validation from "../../Middleware/validation.js";
-import { auth } from "../../Middleware/auth.middleware.js";
+import { auth , roles } from "../../Middleware/auth.middleware.js";
 import { endpoint } from "./order.endpoint.js";
 
 
@@ -14,5 +14,6 @@ router.post('/', auth(endpoint.create),validation(validators.createOrder), async
 router.post('/allMealsFromCart', auth(endpoint.create),validation(validators.createOrderWithAllMealsFromCart), asyncHandler(orderController.createOrderWithAllMealsFromCart));
 router.patch('/cancel/:orderId',auth(endpoint.cancel),validation(validators.cancelOrder), asyncHandler(orderController.cancelOrder));
 router.patch('/updateOrderStatusFromAdmin/:orderId',auth(endpoint.update),validation(validators.updateOrderStatusFromAdmin), asyncHandler(orderController.updateOrderStatusFromAdmin));
+router.get('/' ,auth(Object.values(roles)),validation(validators.getOrders), asyncHandler(orderController.getOrders) );
 
 export default router;
