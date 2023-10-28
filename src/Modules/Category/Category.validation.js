@@ -21,3 +21,8 @@ export const getSpecificCattegory = joi.object({
    categoryId:generalFeilds.id,
    resturantId:generalFeilds.id,
 }).required();
+
+
+export const getCategories = joi.object({
+   resturantId:generalFeilds.id,
+}).required();

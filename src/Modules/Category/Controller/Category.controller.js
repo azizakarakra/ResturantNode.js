@@ -49,7 +49,7 @@ const {resturantId,categoryId} = req.params;
         const{public_id,secure_url}=await cloudinary.uploader.upload(req.file.path,{folder:`${process.env.APP_NAME}/category`});
         await cloudinary.uploader.destroy(Category.image.public_id);
 
-        Category.image = {public_id,secure_ur};
+        Category.image = {public_id,secure_url};
     }
 
     req.body.updatedBy = req.user._id;

@@ -46,7 +46,7 @@ export const updateResturant = async (req, res, next) =>{
         const{public_id,secure_url}=await cloudinary.uploader.upload(req.file.path,{folder:`${process.env.APP_NAME}/resturant`});
         await cloudinary.uploader.destroy(resturant.image.public_id);
 
-        resturant.image = {public_id,secure_ur};
+        resturant.image = {public_id,secure_url};
     }
 
     resturant.updatedBy = req.user._id;
